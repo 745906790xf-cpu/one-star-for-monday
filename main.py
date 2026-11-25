@@ -60,6 +60,9 @@ def write_entry(path: str = "/output/entry.txt") -> None:
         written = handle.read()
     if written != text:
         raise ValueError("read-back verification failed: written bytes differ")
+    if len(written.encode("utf-8")) != len(text.encode("utf-8")):
+        raise ValueError("read-back verification failed: byte length differs")
+    print(f"wrote {len(text)} characters, {len(text.split())} words to {path}")
 
 
 if __name__ == "__main__":
